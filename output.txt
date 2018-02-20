@@ -1,0 +1,67 @@
+vagrant@vagrant:/vagrant$ python app.py
+/usr/local/lib/python2.7/dist-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
+  """)
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: 1
+
+Candidate is jerk, alleges rival - 338647
+Bears love berries, alleges bear - 253801
+Bad things gone, say good people - 170098
+
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: 2
+
+Ursula La Multa - 507594
+Rudolf von Treppenwitz - 423457
+Anonymous Contributor - 170098
+Markoff Chaney - 84557
+
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: ^[[A
+Oops. Something went wrong! Please try again
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: 4
+vagrant@vagrant:/vagrant$ python app.py
+/usr/local/lib/python2.7/dist-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
+  """)
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: 4
+vagrant@vagrant:/vagrant$ python app.py
+/usr/local/lib/python2.7/dist-packages/psycopg2/__init__.py:144: UserWarning: The psycopg2 wheel package will be renamed from release 2.8; in order to keep installing from binary please use "pip install psycopg2-binary" instead. For details see: <http://initd.org/psycopg/docs/install.html#binary-install-from-pypi>.
+  """)
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: 3
+
+2016-07-17 - 2.26
+
+Reporting Utilities
+ 1) Find Three Most Popular Articles of All Time
+ 2) Find Most Popular Article Authors of All Time
+ 3) Display Days Where >1% of Requests Errored Out
+ 4) Quit
+Select an option: 5
+vagrant@vagrant:/vagrant$
