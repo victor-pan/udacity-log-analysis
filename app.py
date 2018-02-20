@@ -68,12 +68,11 @@ def find_top_authors():
 def find_error_days():
     #
     query = """
-    select * from
-        (select
-        substring(to_char(time, 'YYYY-MM-DD') from 1 for 10) date
-        ROUND(COALESCE(100.0 * sum(case when status='404 NOT FOUND' then 1 else 0 end), 0) / count(*), 2) as pct_with_error,
+    select err_date, round(pct_with_error, 2) from
+        (select COALESCE(100.0 * sum(case when status='404 NOT FOUND' then 1 else 0 end), 0) / count(*) as pct_with_error,
+                substring(to_char(time, 'YYYY-MM-DD') from 1 for 10) err_date
         from log
-        group by date) summary
+        group by err_date) summary
     where pct_with_error > 1.0
     """
     exec_query(query)
