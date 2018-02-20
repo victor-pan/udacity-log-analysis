@@ -1,6 +1,8 @@
 #!/usr/bin/python
-from __future__ import print_function # works in python 2.6 and higher
-import psycopg2,os
+from __future__ import print_function  # works in python 2.6 and higher
+import psycopg2
+import os
+
 
 # Executes a read on the database, and prints the results to screen
 def exec_query(query):
@@ -19,6 +21,7 @@ def exec_query(query):
                 print(" - ", end='')
         print()
     print()
+
 
 # Executes the Top 3 Articles query, printing results to screen.
 def find_top_articles():
@@ -52,6 +55,7 @@ def find_top_authors():
     """
     exec_query(query)
 
+
 # Executes the "Days with >1% Web Server Errors" query,
 #  printing results to screen.
 def find_error_days():
@@ -65,8 +69,11 @@ def find_error_days():
     #  I use some of the ideas from the post above, as well as a subselect
     query = """
     select err_date, round(pct_with_error, 2) from
-        (select COALESCE(100.0 * sum(case when status='404 NOT FOUND' then 1 else 0 end), 0) / count(*) as pct_with_error,
-                substring(to_char(time, 'YYYY-MM-DD') from 1 for 10) err_date
+        (select
+         COALESCE(100.0 *
+                  sum(case when status='404 NOT FOUND' then 1 else 0 end), 0)
+                  / count(*) as pct_with_error,
+         substring(to_char(time, 'YYYY-MM-DD') from 1 for 10) err_date
         from log
         group by err_date) summary
     where pct_with_error > 1.0
@@ -87,11 +94,11 @@ if __name__ == "__main__":
         except:
             print("Oops. Something went wrong! Please try again")
             continue
-        if my_choice==1:
+        if my_choice == 1:
             find_top_articles()
-        elif my_choice==2:
+        elif my_choice == 2:
             find_top_authors()
-        elif my_choice==3:
+        elif my_choice == 3:
             find_error_days()
         else:
-            done=True
+            done = True
