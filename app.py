@@ -89,7 +89,9 @@ def find_error_days():
            round(pct_with_error, 2)
     FROM
         (SELECT date_trunc('day', time) err_date,
-        COALESCE(100.0 * SUM(CASE WHEN status='404 NOT FOUND' THEN 1 ELSE 0 END) / COUNT(*), 0.0) as pct_with_error
+        COALESCE(100.0 *
+          SUM(CASE WHEN status='404 NOT FOUND' THEN 1 ELSE 0 END)
+          / COUNT(*), 0.0) as pct_with_error
         FROM log
         GROUP BY err_date) summary
     WHERE pct_with_error > 1.0
