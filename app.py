@@ -1,11 +1,20 @@
-#!/usr/bin/python
-from __future__ import print_function  # works in python 2.6 and higher
+#!/usr/bin/env python3
+
+"""Code for the news data utilities.
+
+This module defines methods for interesting queries on the news database.
+
+The main method allows users to choose a query from a list of options.
+
+More queries can be added here in the future.
+"""
+
 import psycopg2
 import os
 
 
-# Executes a read on the database, and prints the results to screen
 def exec_query(query):
+    """Execute a read on the database, and print the results to screen."""
     print()
     # Connect to the db
     db = psycopg2.connect(database="news")
@@ -16,15 +25,15 @@ def exec_query(query):
     results = c.fetchall()
     for r in results:
         for i in range(len(r)):
-            print(r[i], end='')
+            print(r[i], end="")
             if len(r) - i > 1:
-                print(" - ", end='')
+                print(" - ", end="")
         print()
     print()
 
 
-# Executes the Top 3 Articles query, printing results to screen.
 def find_top_articles():
+    """Execute the Top 3 Articles query, printing results to screen."""
     # Look at SUCCESSFUL GETs only
     # match the URL slug to the article record
     query = """
@@ -38,13 +47,14 @@ def find_top_articles():
     exec_query(query)
 
 
-# Executes the Top Authors query, printing results to screen.
-#  hat off to Marc at SO for concatenation in join:
-#  https://stackoverflow.com/questions/13274679/like-with-on-column-names
 def find_top_authors():
+    """Execute the Top Authors query, printing results to screen."""
     # we can use article slug in a like comparison with the path
     # we look at *SUCCESSFUL* GETs for authors' articles.
     # We return the author's name, and the number of views.
+    #
+    #  hat off to Marc at SO for concatenation in join:
+    #  https://stackoverflow.com/questions/13274679/like-with-on-column-names
     query = """
         select authors.name Author, count(log.id) Number_Views from log
         left join articles on log.path like '/article/' || articles.slug
@@ -56,9 +66,11 @@ def find_top_authors():
     exec_query(query)
 
 
-# Executes the "Days with >1% Web Server Errors" query,
-#  printing results to screen.
 def find_error_days():
+    """Find webserver errors.
+
+    Execute "Days with >1% Web Server Errors" and print results.
+    """
     # Here I'm using substring():
     #  https://www.postgresql.org/docs/9.1/static/functions-string.html
     # I'm also converting timestamps to strings:
@@ -80,8 +92,9 @@ def find_error_days():
     """
     exec_query(query)
 
-# Main loop. Lets user choose a query from a list of options.
+
 if __name__ == "__main__":
+    """Main loop. Let user choose a query from a list of options."""
     done = False
     while (not done):
         print("Reporting Utilities")
@@ -90,8 +103,8 @@ if __name__ == "__main__":
         print(" 3) Display Days Where >1% of Requests Errored Out")
         print(" 4) Quit")
         try:
-            my_choice = int(raw_input("Select an option: "))
-        except:
+            my_choice = int(input("Select an option: "))
+        except Exception e:
             print("Oops. Something went wrong! Please try again")
             continue
         if my_choice == 1:
