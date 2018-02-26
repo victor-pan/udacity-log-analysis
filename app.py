@@ -14,22 +14,24 @@ import os
 
 
 def exec_query(query):
-    """Execute a read on the database, and print the results to screen."""
+    """Execute a read on the database, and print the results to screen.
+    Note: *Assumes that the query returns 2 columns*
+    """
     print()
     # Connect to the db
-    db = psycopg2.connect(database="news")
-    c = db.cursor()
-    # execute select statement!
-    c.execute(query)
-    # print the results to screen
-    results = c.fetchall()
-    for r in results:
-        for i in range(len(r)):
-            print(r[i], end="")
-            if len(r) - i > 1:
-                print(" - ", end="")
+    try:
+        db = psycopg2.connect(database="news")
+        c = db.cursor()
+        # execute select statement!
+        c.execute(query)
+        # print the results to screen
+        results = c.fetchall()
+        for r in results:
+            print('{} - {}'.format(r[0], r[1]))
         print()
-    print()
+    except Exception e:
+        print("Error/Warning encountered! Details follow.")
+        print(e.diag) # print the diagnostics to screen
 
 
 def find_top_articles():
