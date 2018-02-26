@@ -86,7 +86,7 @@ def find_error_days():
     #  The idea of using COALESCE for the roll up comes from:
     #  https://stackoverflow.com/questions/5396498/postgresql-sql-count-of-true-values
     query = """
-    SELECT substring(to_char(err_date, 'YYYY-MM-DD') FROM 1 FOR 10),
+    SELECT to_char(err_date, 'FMMonth DD, YYYY'),
            round(pct_with_error, 2)
     FROM
         (SELECT date_trunc('day', time) err_date,
