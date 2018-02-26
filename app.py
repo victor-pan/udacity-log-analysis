@@ -29,7 +29,7 @@ def exec_query(query):
         for r in results:
             print('{} - {}'.format(r[0], r[1]))
         print()
-    except Exception e:
+    except Exception as e:
         print("Error/Warning encountered! Details follow.")
         print(e.diag) # print the diagnostics to screen
 
@@ -42,8 +42,7 @@ def find_top_articles():
         SELECT articles.title, count(log.id) Total
         FROM log, articles
         WHERE log.status='200 OK' AND log.method='GET' AND
-              log.path LIKE '/article/%'
-              AND substring(log.path from 10 for 999) = articles.slug
+              log.path = '/article/' || articles.slug
         GROUP BY articles.title
         ORDER BY Total DESC
         LIMIT 3;
@@ -62,7 +61,7 @@ def find_top_authors():
     query = """
         SELECT authors.name Author, count(log.id) Number_Views
         FROM log LEFT JOIN articles ON
-             log.path LIKE '/article/' || articles.slug
+             log.path = '/article/' || articles.slug
         JOIN authors ON articles.author = authors.id
         WHERE method='GET' AND status='200 OK' AND log.path LIKE '/article/%'
         GROUP BY authors.name
